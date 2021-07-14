@@ -1,0 +1,289 @@
+#:import MapView kivy.garden.mapview.MapView
+
+WindowManager:
+
+    FirstWindow:
+    SecondWindow:
+    ThirdWindow:
+    Second2Window:
+    MainWindow:
+
+
+<FirstWindow>:
+    name:"Accueil"
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+
+        FloatLayout:
+            orientation: 'horizontal'
+            size: root.width, root.height
+
+            Button:
+                text: "Invité"
+                font_size: 15
+                size_hint: .2, .15
+                pos_hint:{'x':.6,'y':.77}
+                #height:
+                #width:
+                background_color: 8/255,47/255,205/255,1
+                color:1,1,1,1
+                on_release:
+                    app.root.current ='Invité'
+                    root.manager.transition.direction="left"
+
+            Button:
+                text: "Connexion"
+                font_size: 15
+                size_hint: .2, .15
+                pos_hint:{'x':.2,'y':.77}
+                background_color: 8/255,47/255,205/255,1
+                color:1,1,1,1
+
+                on_release:
+                    app.root.current ='Connexion'
+                    root.manager.transition.direction="left"
+            Image:
+                source:'logo1.png'
+                size_hint: .45, .45
+                pos_hint:{'x':.275,'y':.25}
+        Label:
+            text:"EFR'ECO est une application de détection de déchets à partir d'image. D'après les scientifiques, 12,7 millions de tonnes de plastique finissent dans les océans chaque année. Raison pour laquelle l'ONG Sufrider a initié le projet: déchets de déchets plastiques dans les cours d'eau  "
+            text_size: root.width, None
+            size: self.texture_size
+            color:1/255,5/255,90/255,1
+            font_size: 20
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 10
+            spacing:10
+
+            Image:
+                source:'image1.jfif'
+                size: .5,.5
+
+            Image:
+                source:'image2.jfif'
+                size: .5,.5
+            Image:
+                source:'image3.jfif'
+                size: .5,.5
+            Image:
+                source:'image4.jfif'
+                size: .5,.5
+            Image:
+                source:'image5.jfif'
+                size: .5,.5
+            Image:
+                source:'image6.jfif'
+                size: .5,.5
+
+
+<SecondWindow>:
+    name:"Invité"
+
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        Label:
+            text:"Vous êtes en mode invité"
+            color:1/255,5/255,90/255,1
+
+            font_size: 30
+        Button:
+            text: " Voir Cartographie"
+            font_size: 30
+            background_color: 8/255,47/255,205/255,1
+            color:1,1,1,1
+            on_release:
+                app.root.current ='cartographie'
+                root.manager.transition.direction="left"
+
+        Button:
+            text: " Retour"
+            font_size: 30
+            background_color: 8/255,47/255,205/255,1
+            color:1,1,1,1
+            on_release:
+                app.root.current ='Accueil'
+                root.manager.transition.direction="right"
+
+<Second2Window>:
+    name:"cartographie"
+    id: screen_manager
+
+    MapView:
+        lat: 48.7895
+        lon: 2.3637
+        zoom: 10
+        double_tap_zoom: True
+        on_lat:
+            print('latitude', self.lat)
+        on_lon:
+            print('longitude', self.lon)
+        MapMarkerPopup:
+            source: "markerrouge.png"
+            lat: 48.7895
+            lon: 2.3637
+            BoxLayout:
+                orientation: 'vertical'
+                Image:
+                    source:'logoefrei.png'
+            
+        MapMarkerPopup:
+            source: "marker.png"
+            lat: 48.82
+            lon: -3.36
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Bouteilles plastiques'
+                    color:1/255,5/255,90/255,1
+                Image:
+                    source:'image3.jfif'
+
+
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+
+        Label:
+            color:1/255,5/255,90/255,1
+            font_size: 20
+
+        BoxLayout:
+            orientation:'horizontal'
+            padding: 10
+            spacing: 10
+
+
+            TextInput:
+                id: commentaire
+                hint_text: 'Commentaire/Observation (Indiquer votre adresse mail)'
+                #icon_right:"account"
+                size_hint: .3,.3
+                pos_hint:{'center_x':0.10,'center_y':0.10}
+                #on_text:app.process()
+            Button:
+                text: "Soumettre"
+                font_size: 20
+                size_hint: 0.1, 0.1
+                pos_hint:{'center_x':0.10,'center_y':0.10}
+                background_color: 8/255,47/255,205/255,1
+                color:1,1,1,1
+                on_release:
+                    root.soumettre()
+        Button:
+            text: "retour"
+            font_size: 20
+            size_hint: 0.1, 0.1
+            pos_hint:{'center_x':0.95,'center_y':0.95}
+            background_color: 8/255,47/255,205/255,1
+            color:1,1,1,1
+
+            on_release:
+                app.root.current ='Accueil'
+                root.manager.transition.direction="right"
+                
+
+<ThirdWindow>:
+    name:"Connexion"
+
+    BoxLayout:
+        #cols:1
+        orientation: 'vertical'
+        #size: root.width, root.height
+        padding:10
+        spacing: 10
+
+        Label:
+            text:"Identifiez-vous !"
+            color:1/255,5/255,90/255,1
+            #size_hint:.5,.2
+            font_size: 28
+
+        BoxLayout:
+            orientation:"horizontal"
+            spacing: 10
+
+            TextInput:
+                id: login
+                hint_text: 'Votre identifiant'
+                #icon_right:"account"
+                size_hint: .5,.2
+                #pos_hint:{'x':.5,'y':.4}
+                #on_text:app.process()
+            TextInput:
+                id: passw
+                hint_text: 'Votre mot de passe'
+                #icon_right:"eye-off"
+                size_hint: .5,.2
+                #pos_hint:{'x':.25,'y':.3}
+                password: True
+                #on_text:app.process()
+
+
+        Button:
+            text: "Valider"
+            font_size: 20
+            size_hint: .3, .2
+            pos_hint:{'center_x':.5}
+            background_color: 8/255,47/255,205/255,1
+            color:1,1,1,1
+            on_release:
+                root.verify()
+
+        Button:
+            text: "Annuler"
+            font_size: 20
+            size_hint: .3, .2
+            pos_hint:{'center_x':.5}
+            background_color: 8/255,47/255,205/255,1
+            color:1,1,1,1
+            on_release:
+                app.root.current ='Accueil'
+                root.manager.transition.direction="right"
+<MainWindow>:
+    name:"Accueil Membre"
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding:10
+        spacing: 10
+
+        Button:
+            text:"Importer une Image"
+            size_hint: .5, .2
+            pos_hint:{'center_x':.5}
+            background_color: 8/255,47/255,205/255,1
+            color:1,1,1,1
+            on_press:
+                import testing
+        Button:
+            text:"Prendre une photo"
+            size_hint: .5, .2
+            pos_hint:{'center_x':.5}
+            background_color: 8/255,47/255,205/255,1
+            color:1,1,1,1
+            on_press:
+                import cam
+            
+        Button:
+            text:"Consulter les commentaires"
+            size_hint: .5, .2
+            pos_hint:{'center_x':.5}
+            background_color: 8/255,47/255,205/255,1
+            color:1,1,1,1
+            on_release:
+                root.consulter()
+                
+
+        Button:
+            text:"Accueil"
+            size_hint: .5, .2
+            pos_hint:{'center_x':.5}
+            background_color: 8/255,47/255,205/255,1
+            color:1,1,1,1
+            on_release:
+                app.root.current ='Accueil'
+                root.manager.transition.direction="right"

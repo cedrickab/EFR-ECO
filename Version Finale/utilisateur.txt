@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS utilisateur(
+        IdUtilisateur Int NOT NULL ,
+        Nom           Varchar (500) NOT NULL ,
+        Prenom        Varchar (500) NOT NULL ,
+        Password      Varchar (500) NOT NULL,
+	primary key(IdUtilisateur)
+);
+
+
+INSERT INTO utilisateur
+	VALUES (202001,'Ballou','Sary','Sary@');
+INSERT INTO utilisateur
+	VALUES (202002,'Colard','Nathalie','Colard@');   
+INSERT INTO utilisateur
+	VALUES (202003,'Crecel','Jean','Crecel@');
+INSERT INTO utilisateur
+	VALUES (202004,'Kaboré','Cédric','Kabore@');
+INSERT INTO utilisateur
+	VALUES (202005,'Kandiah','Arthy','Kandiah@');
+INSERT INTO utilisateur
+	VALUES (202006,'Kouamé','Olivia','Kouamé@');
